@@ -36,7 +36,7 @@ public class NewWorldFrame implements Processable {
 	}
 
 	@Override
-	public synchronized void processInput(String[] s, ServerProtocol sP) {
+	public void processInput(String[] s, ServerProtocol sP) {
 
 		if (s[0].toLowerCase().equals("back")) {
 			sP.setProcessable(sP);

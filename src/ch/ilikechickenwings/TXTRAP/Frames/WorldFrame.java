@@ -101,7 +101,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 	}
 
 	@Override
-	public synchronized void processInput(String[] s, ServerProtocol sP) {
+	public void processInput(String[] s, ServerProtocol sP) {
 
 		switch (s[0].toLowerCase()) {
 		case "attack":
@@ -359,7 +359,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 
 	}
 
-	public synchronized void loadedGame(ServerProtocol sP) {
+	public void loadedGame(ServerProtocol sP) {
 		sP.sendMessage(new NetInput("Loaded", Console.standartEvent, true, true));
 		sP.sendMessageToAll(new NetInput(sP.getPlayer().getName()
 				+ " entered the game",Console.startOutput));

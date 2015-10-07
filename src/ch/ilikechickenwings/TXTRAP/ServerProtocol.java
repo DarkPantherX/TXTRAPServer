@@ -146,7 +146,7 @@ public class ServerProtocol implements Runnable, Processable {
 	}
 
 
-	public synchronized void close() {
+	public void close() {
 
 		try {
 			if (player != null) {

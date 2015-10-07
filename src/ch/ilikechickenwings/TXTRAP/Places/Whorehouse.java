@@ -23,7 +23,7 @@ public class Whorehouse extends Place{
 	}
 
 	@Override
-	public synchronized void processInput(String[] s, ServerProtocol sP) {
+	public void processInput(String[] s, ServerProtocol sP) {
 		switch (s[0].toLowerCase()){
 		case "help":
 			sP.sendMessage(new NetInput("Available commands:"
