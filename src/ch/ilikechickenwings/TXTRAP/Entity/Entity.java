@@ -23,6 +23,7 @@ public class Entity implements Damageable, Serializable{
 	 * */
 	public Entity(float health2){
 		setHealth(health2);
+		setMaxHealth(health2);
 		
 	}
 	

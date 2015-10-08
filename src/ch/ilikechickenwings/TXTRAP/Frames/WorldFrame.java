@@ -120,7 +120,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 							+ "\n s -> Say something to all player near you"
 							+ "\n letter <playername> <text> -> write a letter to a player, he will see it, as soon as he goes to the post office"
 							+ "\n lookaround -> shows you the places you can interact with and the people around you",
-					Console.standartOutput));
+					Console.standardOutput));
 			break;
 		case "goto":
 			if (s.length > 1) {
@@ -139,7 +139,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 						sP.getPlayer().setCity(c);
 						c.getEntities().add(sP.getPlayer());
 						sP.sendMessage(new NetInput("You went to: "
-								+ c.getCityName(), Console.standartEvent));
+								+ c.getCityName(), Console.standardEvent));
 					} else if (i < 0) {
 						break;
 					}
@@ -153,12 +153,12 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			}
 			break;
 		case "map":
-			sP.sendMessage(new NetInput("Cities here:", Console.standartOutput));
+			sP.sendMessage(new NetInput("Cities here:", Console.standardOutput));
 			City city;
 			for (int in = 0; in < cities.size(); in++) {
 				city = (City) cities.get(in);
 				sP.sendMessage(new NetInput(" " + city.getCityName() + ",",
-						Console.standartListOutput, false, true));
+						Console.standardListOutput, false, true));
 			}
 			break;
 		case "mine":
@@ -169,17 +169,17 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 		case "status":
 			sP.sendMessage(new NetInput("Your name is "
 					+ sP.getPlayer().getName() + " the "
-					+ sP.getPlayer().getGameClass(), Console.standartOutput));
-			sP.sendMessage(new NetInput("Health: ", Console.standartOutput));
+					+ sP.getPlayer().getGameClass(), Console.standardOutput));
+			sP.sendMessage(new NetInput("Health: ", Console.standardOutput));
 			int h1 = (int) (sP.getPlayer().getHealth()
 					/ sP.getPlayer().getMaxHealth() * 10);
 			for (int i1 = 0; i1 < 10; i1++) {
 				if (h1 > 0) {
-					sP.sendMessage(new NetInput("O", Console.standartOutput,
+					sP.sendMessage(new NetInput("O", Console.standardOutput,
 							false, true));
 					h1--;
 				} else {
-					sP.sendMessage(new NetInput("X", Console.standartOutput,
+					sP.sendMessage(new NetInput("X", Console.standardOutput,
 							false, true));
 				}
 
@@ -187,16 +187,16 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 
 			sP.sendMessage(new NetInput(" --> "
 					+ Float.toString(sP.getPlayer().getHealth())
-					+ "% life left", Console.standartOutput, false, true));
+					+ "% life left", Console.standardOutput, false, true));
 
 			sP.sendMessage(new NetInput(
 					"You are in the great "
 							+ sP.getPlayer().getCity().getCityName()
-							+ " at the moment", Console.standartOutput));
+							+ " at the moment", Console.standardOutput));
 			break;
 		case "inventory":
 			sP.sendMessage(new NetInput("In your Inventory is: ",
-					Console.standartOutput));
+					Console.standardOutput));
 
 			if (sP.getPlayer().getInventory().size() > 0) {
 				for (Item mm : sP.getPlayer().getInventory()) {
@@ -205,12 +205,12 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 					} else {
 						sP.sendMessage(new NetInput("->"
 								+ Integer.toString(mm.getQuantity()) + "x "
-								+ mm.getName(), Console.standartListOutput));
+								+ mm.getName(), Console.standardListOutput));
 					}
 				}
 			} else {
 				sP.sendMessage(new NetInput("-->nothing<-- (poor as fuck...)",
-						Console.standartListOutput));
+						Console.standardListOutput));
 			}
 
 			break;
@@ -221,25 +221,25 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			int monthTime = (int) (((time / 60) / 24) / 30) % 12;
 			long yearTime = (long) (((time / 60) / 24) / 30) / 12;
 
-			sP.sendMessage(new NetInput("It is: ", Console.standartOutput));
+			sP.sendMessage(new NetInput("It is: ", Console.standardOutput));
 			if (hourTime / 10 == 0) {
 				sP.sendMessage(new NetInput(Integer.toString(0),
-						Console.standartListOutput, false, true));
+						Console.standardListOutput, false, true));
 			}
 			sP.sendMessage(new NetInput(hourTime + ":",
-					Console.standartListOutput, false, true));
+					Console.standardListOutput, false, true));
 			if (minTime / 10 == 0) {
 				sP.sendMessage(new NetInput(Integer.toString(0),
-						Console.standartListOutput, false, true));
+						Console.standardListOutput, false, true));
 			}
 			sP.sendMessage(new NetInput(minTime + " - ",
-					Console.standartListOutput, false, true));
+					Console.standardListOutput, false, true));
 			sP.sendMessage(new NetInput(Integer.toString(dayTime + 1) + ".",
-					Console.standartListOutput, false, true));
+					Console.standardListOutput, false, true));
 			sP.sendMessage(new NetInput(Integer.toString(monthTime + 1) + ".",
-					Console.standartListOutput, false, true));
+					Console.standardListOutput, false, true));
 			sP.sendMessage(new NetInput(Integer.toString((int) yearTime + 1),
-					Console.standartListOutput, false, true));
+					Console.standardListOutput, false, true));
 
 			break;
 
@@ -347,7 +347,12 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 				}
 			}
 			
-			sP.sendMessage(new NetInput(stringb.toString(),Console.standartListOutput));
+			sP.sendMessage(new NetInput(stringb.toString(),Console.standardListOutput));
+			break;
+		case "offline":
+			sP.sendMessage(new NetInput("You will disconnect now!",Console.errorOutput));
+			sP.sendMessage(new NetInput("y!-!quit!-!y",Console.errorOutput));
+			sP.close();
 			break;
 			
 		default:
@@ -360,7 +365,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 	}
 
 	public void loadedGame(ServerProtocol sP) {
-		sP.sendMessage(new NetInput("Loaded", Console.standartEvent, true, true));
+		sP.sendMessage(new NetInput("Loaded", Console.standardEvent, true, true));
 		sP.sendMessageToAll(new NetInput(sP.getPlayer().getName()
 				+ " entered the game",Console.startOutput));
 		sP.sendMessage(new NetInput("Welcome back, " + sP.getPlayer().getName()

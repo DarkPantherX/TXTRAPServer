@@ -34,7 +34,7 @@ public class Whorehouse extends Place{
 			for(Human h: getHumans()){
 				if(s[1].toLowerCase().equals(h.getName().toLowerCase())&&h instanceof Whore){
 					Whore w = (Whore)h;
-					sP.sendMessage(new NetInput("You fucked " +h.getName(),Console.standartEvent));
+					sP.sendMessage(new NetInput("You fucked " +h.getName(),Console.standardEvent));
 					w.setTimesHadSex(w.getTimesHadSex()+1);
 					
 				}else{
@@ -46,10 +46,10 @@ public class Whorehouse extends Place{
 			
 			break;
 		case "showgirls":
-			sP.sendMessage(new NetInput("There are following whores available: ",Console.standartOutput));
+			sP.sendMessage(new NetInput("There are following whores available: ",Console.standardOutput));
 			for(Human h : getHumans()){
 				if(h instanceof Whore){
-					sP.sendMessage(new NetInput(h.getName()+" ",Console.standartListOutput,false,true));
+					sP.sendMessage(new NetInput(h.getName()+" ",Console.standardListOutput,false,true));
 					
 				}
 				
@@ -68,7 +68,7 @@ public class Whorehouse extends Place{
 		case "leave":
 			stopInteract(sP);
 			sP.getPlayer().setPlace(null);
-			sP.sendMessage(new NetInput("You left the whorehouse",Console.standartEvent,true,true));
+			sP.sendMessage(new NetInput("You left the whorehouse",Console.standardEvent,true,true));
 			break;
 		default:
 			sP.sendMessage(new NetInput("Command not found, try help",Console.errorOutput));
@@ -87,7 +87,7 @@ public class Whorehouse extends Place{
 	@Override
 	public void interact(ServerProtocol sP) {
 		sP.setProcessable(this);
-		sP.sendMessage(new NetInput("Welcome to the whorehouse, write 'help' for more information",Console.standartOutput,true,true));
+		sP.sendMessage(new NetInput("Welcome to the whorehouse, write 'help' for more information",Console.standardOutput,true,true));
 		
 	}
 

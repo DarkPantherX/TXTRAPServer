@@ -93,7 +93,7 @@ public class NewWorldFrame implements Processable {
 							+ " entered the game"));
 					sP.sendMessage(new NetInput(
 							"Type help for available commands",
-							Console.standartOutput));
+							Console.standardOutput));
 					f.getPvisits().add(name.toString());
 
 				} else {

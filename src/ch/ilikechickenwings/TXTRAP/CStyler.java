@@ -1,5 +1,6 @@
 package ch.ilikechickenwings.TXTRAP;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.Serializable;
 
 
@@ -13,7 +14,7 @@ public class CStyler implements Serializable{
 	private Color background;
 	private boolean bold;
 	private boolean italic;
-	
+	private Font font;
 	
 	
 	public CStyler(Color f, Color b, boolean bo, boolean it){
@@ -21,7 +22,7 @@ public class CStyler implements Serializable{
 		setBackground(b);
 		setBold(bo);
 		setItalic(it);
-		
+		setFont(new Font("Courier New", Font.PLAIN, 12));
 	}
 	
 	
@@ -72,6 +73,19 @@ public class CStyler implements Serializable{
 	 */
 	public void setItalic(boolean italic) {
 		this.italic = italic;
+	}
+
+
+	public Font getFont() {
+		return font;
+	}
+
+	public String getFontFamily(){
+		return font.getFamily();
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
 	}
 	
 	

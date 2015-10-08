@@ -41,15 +41,15 @@ public class Market extends Place{
 						+"\n leave -> Stops the interaction"));
 				break;
 			case "showitems":
-				sP.sendMessage(new NetInput("On the market available is: ", Console.standartOutput));
+				sP.sendMessage(new NetInput("On the market available is: ", Console.standardOutput));
 				
 				if(items.size()>0){
 					for(Item it : items){
 					
-						sP.sendMessage(new NetInput("->"+it.getName()+" - "+it.getPrice()+" Gold", Console.standartListOutput));
+						sP.sendMessage(new NetInput("->"+it.getName()+" - "+it.getPrice()+" Gold", Console.standardListOutput));
 					}
 				}else{
-					sP.sendMessage(new NetInput("-->nothing<-- (market is poor as fuck)", Console.standartListOutput));
+					sP.sendMessage(new NetInput("-->nothing<-- (market is poor as fuck)", Console.standardListOutput));
 				}
 				break;
 			case "buy":
@@ -85,7 +85,7 @@ public class Market extends Place{
 					
 							}
 					if(done){
-						sP.sendMessage(new NetInput("You bought "+s[2]+"x "+s[1],Console.standartEvent));
+						sP.sendMessage(new NetInput("You bought "+s[2]+"x "+s[1],Console.standardEvent));
 						break;
 					}
 						}
@@ -136,7 +136,7 @@ public class Market extends Place{
 				
 				break;
 			case "inventory":
-				sP.sendMessage(new NetInput("In your Inventory is: ", Console.standartOutput));
+				sP.sendMessage(new NetInput("In your Inventory is: ", Console.standardOutput));
 					if(sP.getPlayer().getInventory().size()>0){
 						for(Item mm : sP.getPlayer().getInventory()){
 						
@@ -144,18 +144,18 @@ public class Market extends Place{
 							sP.getPlayer().getInventory().remove(mm);
 				
 						}else{
-							sP.sendMessage(new NetInput("->"+Integer.toString(mm.getQuantity())+"x "+mm.getName(), Console.standartListOutput));
+							sP.sendMessage(new NetInput("->"+Integer.toString(mm.getQuantity())+"x "+mm.getName(), Console.standardListOutput));
 						}
 						}
 					}else{
-						sP.sendMessage(new NetInput("-->nothing<-- (poor as fuck...)", Console.standartListOutput));
+						sP.sendMessage(new NetInput("-->nothing<-- (poor as fuck...)", Console.standardListOutput));
 					}
 				
 					break;
 			case "leave":
 				stopInteract(sP);
 				sP.getPlayer().setPlace(null);
-				sP.sendMessage(new NetInput("You left the market",Console.standartEvent,true,true));
+				sP.sendMessage(new NetInput("You left the market",Console.standardEvent,true,true));
 				break;
 			default:
 				sP.sendMessage(new NetInput("Command not found",Console.errorOutput));
@@ -177,7 +177,7 @@ public class Market extends Place{
 	@Override
 	public void interact(ServerProtocol sP) {
 		sP.setProcessable(this);
-		sP.sendMessage(new NetInput("Welcome to the market, write 'help' for more information",Console.standartOutput,true,true));
+		sP.sendMessage(new NetInput("Welcome to the market, write 'help' for more information",Console.standardOutput,true,true));
 		
 		
 	}

@@ -32,7 +32,7 @@ public class PostOffice extends Place{
 			for(StringBuilder let : sP.getWorldFrame().getLetters()){
 				String s0[]=let.toString().split("-!-");
 				if(s0[0].toLowerCase().equals(sP.getPlayer().getName().toLowerCase())){
-					sP.sendMessage(new NetInput("\n"+s0[1]+"\n",Console.standartOutput));
+					sP.sendMessage(new NetInput("\n"+s0[1]+"\n",Console.standardOutput));
 					sP.getWorldFrame().getLetters().remove(let);
 					done=true;
 					break;
@@ -49,7 +49,7 @@ public class PostOffice extends Place{
 			case "leave":
 				stopInteract(sP);
 				sP.getPlayer().setPlace(null);
-				sP.sendMessage(new NetInput("You left the post office",Console.standartEvent,true,true));
+				sP.sendMessage(new NetInput("You left the post office",Console.standardEvent,true,true));
 				break;
 		default:			
 			sP.sendMessage(new NetInput("Command not found, try 'help'",Console.errorOutput));
@@ -72,7 +72,7 @@ public class PostOffice extends Place{
 	@Override
 	public void interact(ServerProtocol sP) {
 		sP.setProcessable(this);
-		sP.sendMessage(new NetInput("Welcome to the post office, write 'help' for more information",Console.standartOutput,true,true));
+		sP.sendMessage(new NetInput("Welcome to the post office, write 'help' for more information",Console.standardOutput,true,true));
 		
 	}
 

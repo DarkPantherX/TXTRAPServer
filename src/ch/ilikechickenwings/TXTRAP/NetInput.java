@@ -16,7 +16,7 @@ public class NetInput implements Serializable{
 	
 	public NetInput(String str){
 		setTxt(str);
-		setStyle(Console.standartOutput);
+		setStyle(Console.standardOutput);
 		setClearTxt(false);
 	}
 	
@@ -29,7 +29,7 @@ public class NetInput implements Serializable{
 	
 	public NetInput(String str, boolean clear){
 		setTxt(str);
-		setStyle(Console.standartOutput);
+		setStyle(Console.standardOutput);
 		setClearTxt(clear);
 	}
 	

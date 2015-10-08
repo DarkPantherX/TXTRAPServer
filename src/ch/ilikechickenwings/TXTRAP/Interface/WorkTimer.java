@@ -31,8 +31,8 @@ public class WorkTimer implements Runnable, Processable, Serializable{
 		getsP().setProcessable(this);
 		System.out.println("here");
 		new Thread(this).start();
-		getsP().sendMessage(new NetInput("You are now working " + hours +" hour(s)",Console.standartEvent,true,true));
-		getsP().sendMessage(new NetInput("Type help for more informations",Console.standartOutput));
+		getsP().sendMessage(new NetInput("You are now working " + hours +" hour(s)",Console.standardEvent,true,true));
+		getsP().sendMessage(new NetInput("Type help for more informations",Console.standardOutput));
 		
 	}
 	
@@ -58,7 +58,7 @@ public class WorkTimer implements Runnable, Processable, Serializable{
 				getsP().setProcessable(worldFrame);
 				running=false;
 				
-				getsP().sendMessage(new NetInput("You got " +hours*100+" Gold for your work",Console.standartEvent,true,true));
+				getsP().sendMessage(new NetInput("You got " +hours*100+" Gold for your work",Console.standardEvent,true,true));
 			}else{
 				running=false;
 			}
@@ -81,16 +81,16 @@ public class WorkTimer implements Runnable, Processable, Serializable{
 	public void processInput(String[] s,ServerProtocol sP1) {
 		switch (s[0].toLowerCase()){
 		case "help":
-			sP1.sendMessage(new NetInput("You are working right now, you can't do anything right now. You can stop working but you won't get any gold for your work. Use 'stop' to stop working. Use 'status' to see how long you have left.",Console.standartOutput));
+			sP1.sendMessage(new NetInput("You are working right now, you can't do anything right now. You can stop working but you won't get any gold for your work. Use 'stop' to stop working. Use 'status' to see how long you have left.",Console.standardOutput));
 			break;
 		case "stop":
 			
-			sP1.sendMessage(new NetInput("You stoped working before the work ended",Console.standartEvent,true,true));
+			sP1.sendMessage(new NetInput("You stoped working before the work ended",Console.standardEvent,true,true));
 			running=false;
 			sP1.setProcessable(worldFrame);
 			break;
 		case "status":
-			sP1.sendMessage(new NetInput("Work hours left: " + (beginTime+(hours*60)-worldFrame.getTime())+ " from "+ hours*60+" minutes",Console.standartOutput));
+			sP1.sendMessage(new NetInput("Work hours left: " + (beginTime+(hours*60)-worldFrame.getTime())+ " from "+ hours*60+" minutes",Console.standardOutput));
 			break;
 		default:
 			sP1.sendMessage(new NetInput("Command not found",Console.errorOutput));
