@@ -14,7 +14,7 @@ public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * ArrayList with enitites in the city
+	 * ArrayList with enitites in the city 
 	 */
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	private ArrayList<Place> places = new ArrayList<Place>();
