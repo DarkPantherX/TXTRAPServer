@@ -110,10 +110,22 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			if(s.length>1){
 				for(Entity ent1 : sP.getPlayer().getCity().getEntities()){
 					if(ent1 instanceof Player){
+						for(ServerProtocol pa : players){
+							if(pa.getPlayer().getName().toLowerCase().equals(s[1].toLowerCase())){
+								
+								sP.sendMessage(new NetInput("You attacked: " + s[1]));
+								new FightFramePlayer(sP, pa,this,false);
+								
+								done1=true;
+								break;
+								
+							}
+						}
+						
 						
 					}else if(ent1 instanceof Human){
 						Human h1= (Human) ent1;
-						if(h1.getName().toLowerCase().equals(s[1])){
+						if(h1.getName().toLowerCase().equals(s[1].toLowerCase())){
 							sP.sendMessage(new NetInput("You attacked: " + s[1]));
 							new FightFrameNPC(sP, h1,this,false);
 							

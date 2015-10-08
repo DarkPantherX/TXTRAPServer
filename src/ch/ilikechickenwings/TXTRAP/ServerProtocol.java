@@ -11,6 +11,7 @@ import java.net.Socket;
 
 import ch.ilikechickenwings.TXTRAP.Entity.Player;
 import ch.ilikechickenwings.TXTRAP.Frames.FightFrameNPC;
+import ch.ilikechickenwings.TXTRAP.Frames.FightFramePlayer;
 import ch.ilikechickenwings.TXTRAP.Frames.NewWorldFrame;
 import ch.ilikechickenwings.TXTRAP.Frames.Processable;
 import ch.ilikechickenwings.TXTRAP.Frames.WorldFrame;
@@ -168,7 +169,7 @@ public class ServerProtocol implements Runnable, Processable {
 						.append((player.getName().concat(".dat")).toLowerCase()).toString();
 				try {
 					
-					if(processable instanceof FightFrameNPC){
+					if(processable instanceof FightFrameNPC||processable instanceof FightFramePlayer){
 					String s0[]={"surrender"};
 					processable.processInput(s0, this);
 					}
