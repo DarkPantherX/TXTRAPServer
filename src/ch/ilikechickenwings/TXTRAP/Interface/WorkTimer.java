@@ -29,7 +29,6 @@ public class WorkTimer implements Runnable, Processable, Serializable{
 		this.beginTime=wF.getTime();
 		this.worldFrame=wF;
 		getsP().setProcessable(this);
-		System.out.println("here");
 		new Thread(this).start();
 		getsP().sendMessage(new NetInput("You are now working " + hours +" hour(s)",Console.standardEvent,true,true));
 		getsP().sendMessage(new NetInput("Type help for more informations",Console.standardOutput));
@@ -38,7 +37,7 @@ public class WorkTimer implements Runnable, Processable, Serializable{
 	
 	
 	@Override
-	public synchronized void run() {
+	public void run() {
 		
 		while(running){
 			if(beginTime+(hours*60)<getsP().getWorldFrame().getTime()){

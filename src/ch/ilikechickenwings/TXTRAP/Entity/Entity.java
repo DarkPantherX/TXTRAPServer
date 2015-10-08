@@ -16,6 +16,7 @@ public class Entity implements Damageable, Serializable{
 	private float maxHealth;
 	/** ArrayList to save Items in*/
 	private ArrayList<Item> inventory = new ArrayList<Item>();
+	private boolean alive=true;
 
 	
 	/**Creates a new Entity with health
@@ -32,7 +33,13 @@ public class Entity implements Damageable, Serializable{
 	
 	@Override
 	public void getDamaged(float damage) {
+		
 		health=health-damage;
+		if(health<=0){
+			System.out.println(health);
+			health=0;
+			alive=false;
+		}
 		
 	}
 	
@@ -83,6 +90,26 @@ public class Entity implements Damageable, Serializable{
 	 */
 	public void setInventory(ArrayList<Item> inventory) {
 		this.inventory = inventory;
+	}
+
+
+
+
+	/**
+	 * @return the alive
+	 */
+	public boolean isAlive() {
+		return alive;
+	}
+
+
+
+
+	/**
+	 * @param alive the alive to set
+	 */
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 

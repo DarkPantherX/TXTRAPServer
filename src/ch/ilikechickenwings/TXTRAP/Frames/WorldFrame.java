@@ -65,6 +65,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 		m.getItems().add(new Item("Sword", 0, 50));
 		city.getPlaces().add(m);
 		city.getPlaces().add(p);
+		city.getEntities().add(new Whore(100,"Peter",city,"",null));
 		cities.add(city);
 		city = new City("Bananistan");
 		p = new PostOffice();
@@ -105,8 +106,28 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 
 		switch (s[0].toLowerCase()) {
 		case "attack":
-			sP.sendMessage(new NetInput("You attacked: " + s[1]));
+			boolean done1=false;
+			if(s.length>1){
+				for(Entity ent1 : sP.getPlayer().getCity().getEntities()){
+					if(ent1 instanceof Player){
+						
+					}else if(ent1 instanceof Human){
+						Human h1= (Human) ent1;
+						if(h1.getName().toLowerCase().equals(s[1])){
+							sP.sendMessage(new NetInput("You attacked: " + s[1]));
+							new FightFrameNPC(sP, h1,this,false);
+							
+							done1=true;
+							break;
+							}
+						}
+					}
+				
+				if(!done1){
+					sP.sendMessage(new NetInput("Nobody found with this name",Console.errorOutput));
 
+				}
+				}
 			break;
 		case "help":
 			sP.sendMessage(new NetInput(

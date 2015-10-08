@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import ch.ilikechickenwings.TXTRAP.Entity.Player;
+import ch.ilikechickenwings.TXTRAP.Frames.FightFrameNPC;
 import ch.ilikechickenwings.TXTRAP.Frames.NewWorldFrame;
 import ch.ilikechickenwings.TXTRAP.Frames.Processable;
 import ch.ilikechickenwings.TXTRAP.Frames.WorldFrame;
@@ -53,7 +54,7 @@ public class ServerProtocol implements Runnable, Processable {
 	}
 
 	@Override
-	public synchronized void processInput(String[] s, ServerProtocol sP) {
+	public void processInput(String[] s, ServerProtocol sP) {
 
 		switch (s[0].toLowerCase()) {
 		case "login":
@@ -117,10 +118,10 @@ public class ServerProtocol implements Runnable, Processable {
 				+ socket.getRemoteSocketAddress());
 
 		while (asdf) {
-
 			try {
 
 				NetInput mei = (NetInput) ois.readObject();
+				System.out.println(mei.getTxt());
 				processable.processInput(mei.getTxt().split(" "), this);
 
 				Thread.sleep(50L);
@@ -166,9 +167,12 @@ public class ServerProtocol implements Runnable, Processable {
 						.append("/.TXTRAPServer/")
 						.append((player.getName().concat(".dat")).toLowerCase()).toString();
 				try {
+					
+					if(processable instanceof FightFrameNPC){
+					String s0[]={"surrender"};
+					processable.processInput(s0, this);
+					}
 					player.processable = processable;
-					// String s0[]={"stop"};
-					// processable.processInput(s0, this);
 					ObjectOutputStream oos = new ObjectOutputStream(
 							new FileOutputStream(s1));
 					oos.writeObject(player);
@@ -205,7 +209,7 @@ public class ServerProtocol implements Runnable, Processable {
 	}
 	
 	
-	public synchronized void sendMessage(NetInput mes) {
+	public void sendMessage(NetInput mes) {
 
 		if (socket.isConnected()) {
 			try {

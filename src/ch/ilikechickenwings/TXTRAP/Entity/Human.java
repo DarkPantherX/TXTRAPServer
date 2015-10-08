@@ -14,6 +14,7 @@ public abstract class Human extends Entity{
 	private City city;
 	private Place place;
 	private String responseLine;
+	private PrimaryAttribute primaryAttribute;
 	
 	/** Has the name of the human */
 	private String name;
@@ -25,6 +26,7 @@ public abstract class Human extends Entity{
 		setResponseLine(responseLine1);
 		setPlace(place2);
 		responseLine.concat("");
+		setPrimaryAttribute(new PrimaryAttribute(10));
 		
 	}
 	
@@ -103,6 +105,26 @@ public abstract class Human extends Entity{
 	 */
 	public void setResponseLine(String responseLine) {
 		this.responseLine = responseLine;
+	}
+
+
+
+
+	/**
+	 * @return the primaryAttribute
+	 */
+	public PrimaryAttribute getPrimaryAttribute() {
+		return primaryAttribute;
+	}
+
+
+
+
+	/**
+	 * @param primaryAttribute the primaryAttribute to set
+	 */
+	public void setPrimaryAttribute(PrimaryAttribute primaryAttribute) {
+		this.primaryAttribute = primaryAttribute;
 	}
 	
 	
