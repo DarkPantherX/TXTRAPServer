@@ -75,6 +75,7 @@ public class Player extends Human implements Serializable{
 	public void killPlayer(Human human, ServerProtocol sP) {
 		getInventory().clear();
 		setCity(birthCity);
+		setAlive(true);
 		sP.setProcessable(sP.getWorldFrame());
 		sP.sendMessage(new NetInput("You died and lost all your items! But your sould reincarnated in your birthcity!",Console.standardEvent,true,true));
 		setHealth(getMaxHealth());
