@@ -3,6 +3,7 @@ package ch.ilikechickenwings.TXTRAP.Entity;
 import java.io.Serializable;
 
 import ch.ilikechickenwings.TXTRAP.City;
+import ch.ilikechickenwings.TXTRAP.Console;
 import ch.ilikechickenwings.TXTRAP.NetInput;
 import ch.ilikechickenwings.TXTRAP.ServerProtocol;
 import ch.ilikechickenwings.TXTRAP.Places.Place;
@@ -75,7 +76,7 @@ public class Player extends Human implements Serializable{
 		getInventory().clear();
 		setCity(birthCity);
 		sP.setProcessable(sP.getWorldFrame());
-		sP.sendMessage(new NetInput("You died and lost all your items! But your sould reincarnated in your birthcity!"));
+		sP.sendMessage(new NetInput("You died and lost all your items! But your sould reincarnated in your birthcity!",Console.standardEvent,true,true));
 		setHealth(getMaxHealth());
 		
 	}
