@@ -284,7 +284,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			}
 			buil.replace(0, 2, "");
 			for (ServerProtocol sePr : players)
-				if (sePr.getPlayer().getCity().equals(sP.getPlayer().getCity())) {
+				if (sePr.getPlayer().getCity().getCityName().equals(sP.getPlayer().getCity().getCityName())) {
 					sePr.sendMessage(new NetInput("<"+sP.getPlayer().getName()+">"
 							+ ": " + buil.toString()));
 				}

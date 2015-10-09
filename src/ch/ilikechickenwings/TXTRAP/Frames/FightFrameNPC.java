@@ -34,6 +34,8 @@ public class FightFrameNPC implements Processable, Runnable{
 		
 		sP.setProcessable(this);
 		
+		sP.sendMessage(new NetInput("FIGHT",Console.startOutput,true,true));
+		
 		new Thread(this).start();
 		
 		
@@ -47,14 +49,14 @@ public class FightFrameNPC implements Processable, Runnable{
 			
 		case "attack":
 			human.getDamaged(sP.getPlayer().getPrimaryAttribute().getPoints());
-			sP.sendMessageToAll(new NetInput("You attacked your enemy with "+sP.getPlayer().getPrimaryAttribute().getPoints()+" damage",Console.standardEvent));
-			sP.sendMessageToAll(new NetInput("Enemy life left: " + human.getHealth() + " of "+ human.getMaxHealth(),Console.standardEvent));
+			sP.sendMessage(new NetInput("You attacked your enemy with "+sP.getPlayer().getPrimaryAttribute().getPoints()+" damage",Console.standardEvent));
+			sP.sendMessage(new NetInput("Enemy life left: " + human.getHealth() + " of "+ human.getMaxHealth(),Console.standardEvent));
 
 			if(!human.isAlive()){
 				notEnded=false;
 				sP.setProcessable(worldFrame);
 				sP.getPlayer().getCity().getEntities().add(sP.getPlayer());
-				sP.sendMessageToAll(new NetInput("You won",Console.standardEvent));
+				sP.sendMessage(new NetInput("You won",Console.standardEvent));
 			}else{
 				yourTurn=false;
 			}
@@ -62,7 +64,7 @@ public class FightFrameNPC implements Processable, Runnable{
 			
 			break;
 		case "skip":
-			sP.sendMessageToAll(new NetInput("You skipped your turn",Console.standardEvent));
+			sP.sendMessage(new NetInput("You skipped your turn",Console.standardEvent));
 			yourTurn=false;
 			
 			break;
@@ -74,10 +76,9 @@ public class FightFrameNPC implements Processable, Runnable{
 			for(Item i : sP.getPlayer().getInventory()){
 				if(i.getName().toLowerCase().equals("gold")){
 					i.setQuantity(i.getQuantity()/2);
-					sP.sendMessage(new NetInput("You lost half of your gold, but got away with your life!",Console.errorOutput));
 				}
 			}
-
+			sP.sendMessage(new NetInput("You lost half of your gold, but got away with your life!",Console.errorOutput));
 			break;
 		default:
 			sP.sendMessage(new NetInput("Command not found, type 'help' for information"));
@@ -92,7 +93,7 @@ public class FightFrameNPC implements Processable, Runnable{
 	@Override
 	public String getStartInput() {
 		
-		return "You can't be here, type 'surrender'";
+		return "NP";
 	}
 
 	
@@ -102,8 +103,8 @@ public class FightFrameNPC implements Processable, Runnable{
 		while(notEnded){
 			if(!yourTurn){
 				serverProtocol.getPlayer().getDamaged(human.getPrimaryAttribute().getAttackDamage());
-				serverProtocol.sendMessageToAll(new NetInput("You got attacked with: " + human.getPrimaryAttribute().getAttackDamage(),Console.standardEvent));
-				serverProtocol.sendMessageToAll(new NetInput("Life left: " + serverProtocol.getPlayer().getHealth() + " of "+ serverProtocol.getPlayer().getMaxHealth(),Console.standardEvent));
+				serverProtocol.sendMessage(new NetInput("You got attacked with: " + human.getPrimaryAttribute().getAttackDamage(),Console.standardEvent));
+				serverProtocol.sendMessage(new NetInput("Life left: " + serverProtocol.getPlayer().getHealth() + " of "+ serverProtocol.getPlayer().getMaxHealth(),Console.standardEvent));
 				
 				if(!serverProtocol.getPlayer().isAlive()){
 					serverProtocol.getPlayer().killPlayer(human,serverProtocol);

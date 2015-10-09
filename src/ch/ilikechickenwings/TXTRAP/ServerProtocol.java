@@ -82,6 +82,8 @@ public class ServerProtocol implements Runnable, Processable {
 								wT.setWorldFrame(worldFrame);
 								wT.setsP(this);
 								new Thread(wT).start();
+							}else if(processable.getStartInput().equals("NP")){
+								setProcessable(worldFrame);
 							}
 
 							TXTRAPServer.worldFrame.loadedGame(this);
@@ -122,7 +124,6 @@ public class ServerProtocol implements Runnable, Processable {
 			try {
 
 				NetInput mei = (NetInput) ois.readObject();
-				System.out.println(mei.getTxt());
 				processable.processInput(mei.getTxt().split(" "), this);
 
 				Thread.sleep(50L);
@@ -144,7 +145,7 @@ public class ServerProtocol implements Runnable, Processable {
 
 	@Override
 	public String getStartInput() {
-		return "You are somewhere you shouldn't be... ask the admins...";
+		return "NP";
 	}
 
 
@@ -200,7 +201,7 @@ public class ServerProtocol implements Runnable, Processable {
 	}
 
 	
-	public void sendMessageToAll(NetInput mes) {
+	public synchronized void sendMessageToAll(NetInput mes) {
 		for (ServerProtocol s : WorldFrame.players) {
 
 			s.sendMessage(mes);
@@ -210,7 +211,7 @@ public class ServerProtocol implements Runnable, Processable {
 	}
 	
 	
-	public void sendMessage(NetInput mes) {
+	public synchronized void sendMessage(NetInput mes) {
 
 		if (socket.isConnected()) {
 			try {
