@@ -110,10 +110,12 @@ public class FightFramePlayer implements Processable, Runnable{
 					surrender(sP,onTurn);
 					break;
 				case "attack":
-					notOnTurn.getPlayer().getDamaged(sP.getPlayer().getPrimaryAttribute().getPoints());
+					notOnTurn.getPlayer().getDamaged(sP.getPlayer().getDamage());
 					onTurn.sendMessage(new NetInput("You attacked your enemy with "
 							+ "\nEnemy life left: " + notOnTurn.getPlayer().getHealth() + " of "+ notOnTurn.getPlayer().getMaxHealth()+sP.getPlayer().getPrimaryAttribute().getPoints()+" damage",Console.standardEvent));
 					
+					notOnTurn.sendMessage(new NetInput("You took damaged by your enemy with "
+							+ "\nLife life left: " + notOnTurn.getPlayer().getHealth() + " of "+ notOnTurn.getPlayer().getMaxHealth()+sP.getPlayer().getPrimaryAttribute().getPoints()+" damage",Console.errorOutput));
 
 					if(!notOnTurn.getPlayer().isAlive()){
 						fightRunning=false;

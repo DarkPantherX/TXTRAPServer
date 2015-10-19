@@ -219,7 +219,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			}
 
 			sP.sendMessage(new NetInput(" --> "
-					+ Float.toString(sP.getPlayer().getHealth())
+					+ Double.toString(sP.getPlayer().getHealth())
 					+ "% life left", Console.standardOutput, false, true));
 
 			sP.sendMessage(new NetInput(

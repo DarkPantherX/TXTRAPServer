@@ -11,9 +11,9 @@ public class Entity implements Damageable, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/** The health an entity has*/
-	private float health;
+	private double health;
 	/** The maximal health an entity can have*/
-	private float maxHealth;
+	private double maxHealth;
 	/** ArrayList to save Items in*/
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private boolean alive=true;
@@ -32,7 +32,7 @@ public class Entity implements Damageable, Serializable{
 	
 	
 	@Override
-	public void getDamaged(float damage) {
+	public void getDamaged(double damage) {
 		
 		health=health-damage;
 		if(health<=0){
@@ -47,21 +47,21 @@ public class Entity implements Damageable, Serializable{
 	/**
 	 * @return the health
 	 */
-	public float getHealth() {
+	public double getHealth() {
 		return health;
 	}
 
 	/**
 	 * @param health the health to set
 	 */
-	public void setHealth(float health) {
+	public void setHealth(double health) {
 		this.health = health;
 	}
 
 	/**
 	 * @return the maxHealth
 	 */
-	public float getMaxHealth() {
+	public double getMaxHealth() {
 		return maxHealth;
 	}
 
@@ -71,7 +71,7 @@ public class Entity implements Damageable, Serializable{
 	/**
 	 * @param maxHealth the maxHealth to set
 	 */
-	public void setMaxHealth(float maxHealth) {
+	public void setMaxHealth(double maxHealth) {
 		this.maxHealth = maxHealth;
 	}
 

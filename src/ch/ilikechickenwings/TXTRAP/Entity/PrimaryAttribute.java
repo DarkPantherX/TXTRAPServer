@@ -33,9 +33,9 @@ public class PrimaryAttribute implements Serializable{
 		this.points = points;
 	}
 	
-	public float getAttackDamage(){
+	public double getAttackDamage(){
 		
-		return (float)points;
+		return (double)points;
 		
 	}
 	
