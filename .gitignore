@@ -31,3 +31,5 @@ _$*
 .git
 bin
 .DS_Store
+.idea/
+TXTRAPServer.iml

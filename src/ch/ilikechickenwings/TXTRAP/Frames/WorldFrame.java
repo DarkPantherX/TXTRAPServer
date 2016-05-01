@@ -65,7 +65,13 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 		m.getItems().add(new Item("Sword", 0, 50));
 		city.getPlaces().add(m);
 		city.getPlaces().add(p);
-		city.getEntities().add(new Whore(100,"Peter",city,"",null));
+		Whore peter = new Whore(100,"Peter",city,"",null);
+		peter.setGreeting("Hello!");
+		String[] oL = {"The weather is great today!","I don't like you","I like your hat"};
+		String[] aL = {"Yes, it is.", "Fuck off!","Who doesn't like hats?"};
+		peter.setOptionList(oL);
+		peter.setAnswerList(aL);
+		city.getEntities().add(peter);
 		cities.add(city);
 		city = new City("Bananistan");
 		p = new PostOffice();
@@ -128,7 +134,7 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 						if(h1.getName().toLowerCase().equals(s[1].toLowerCase())){
 							sP.sendMessage(new NetInput("You attacked: " + s[1]));
 							new FightFrameNPC(sP, h1,this,false);
-							
+
 							done1=true;
 							break;
 							}
@@ -146,6 +152,8 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 					"Available commands: \n map ->Showes Cities "
 							+ "\n goto <cityname> ->You go to the chosen city"
 							+ "\n status ->Tells you how many lifes you have left"
+							+ "\n attack <target> ->Attacks a player or NPC"
+							+ "\n talk <target> ->Talk to a NPC"
 							+ "\n inventory -> Shoes you your inventory"
 							+ "\n time ->shows the current time"
 							+ "\n interact <place> ->Interact with a place in this city"
@@ -382,6 +390,31 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 			
 			sP.sendMessage(new NetInput(stringb.toString(),Console.standardListOutput));
 			break;
+
+		case "talk":
+			boolean done2=false;
+			if(s.length>1){
+				for(Entity ent1 : sP.getPlayer().getCity().getEntities()){
+					if(ent1 instanceof Human){
+						Human h2= (Human) ent1;
+						if(h2.getName().toLowerCase().equals(s[1].toLowerCase())){
+							sP.sendMessage(new NetInput("You are talking to: " + s[1]));
+							new TalkFrameNPC(sP, h2,this);
+
+							done2=true;
+							break;
+						}
+					}
+				}
+
+				if(!done2){
+					sP.sendMessage(new NetInput("Nobody found with this name",Console.errorOutput));
+
+				}
+			}
+
+			break;
+
 		case "offline":
 			sP.sendMessage(new NetInput("You will disconnect now!",Console.errorOutput));
 			sP.sendMessage(new NetInput("y!-!quit!-!y",Console.errorOutput));

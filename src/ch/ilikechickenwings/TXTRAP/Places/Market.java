@@ -35,7 +35,7 @@ public class Market extends Place{
 			case "help":
 				sP.sendMessage(new NetInput("Available commands:"
 						+"\n showitems -> shows the items to sell"
-						+"\n buy <item name> <optinal: quantity> -> buys the item"
+						+"\n buy <item name> <optional: quantity> -> buys the item"
 						+"\n sell <item name> <optional: quantity> -> shows the items to sell"
 						+"\n inventory -> shows your inventory"
 						+"\n leave -> Stops the interaction"));
@@ -95,7 +95,7 @@ public class Market extends Place{
 				}
 				
 				}else{
-					sP.sendMessage(new NetInput("Commend was used wrong: buy <item> <quantity>",Console.errorOutput));
+					sP.sendMessage(new NetInput("Command was used wrong: buy <item> <quantity>",Console.errorOutput));
 				}
 				break;
 			case "sell":

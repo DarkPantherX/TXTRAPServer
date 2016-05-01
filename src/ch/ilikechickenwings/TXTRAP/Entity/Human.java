@@ -20,6 +20,12 @@ public abstract class Human extends Entity{
 	
 	private Item rightHand;
 	private Item leftHand;
+
+
+
+	private String greeting;
+	private String[] optionList;
+	private String[] answerList;
 	
 	/** Has the name of the human */
 	private String name;
@@ -198,8 +204,78 @@ public abstract class Human extends Entity{
 	public void setLeftHand(Item leftHand) {
 		this.leftHand = leftHand;
 	}
-	
-	
+
+
+
+
+	/**
+	 * @return the greeting
+	 */
+	public String getGreeting() {
+		return greeting;
+	}
+
+
+
+	/**
+	 * @param greeting the greeting to set
+	 */
+	public void setGreeting(String greeting) {
+		this.greeting = greeting;
+	}
+
+
+
+	/**
+	 * @return the optionList
+	 */
+	public String[] getOptionList() {
+		return optionList;
+	}
+
+
+
+	/**
+	 * @param optionList the optionList to set
+	 */
+	public void setOptionList(String[] optionList) {
+		this.optionList = optionList;
+	}
+
+	/**
+	 * @return the answerList
+	 */
+	public String[] getAnswerList() {
+		return answerList;
+	}
+
+	/**
+	 * @return the n-th element of the answerList
+	 */
+	public String getAnswer(int n) {
+		if(n-1 < answerList.length)
+			return answerList[n-1];
+		else
+			return "";
+	}
+
+	/**
+	 * @return the n-th element of the optionList
+	 */
+	public String getOption(int n) {
+		if(n-1 < optionList.length)
+			return optionList[n-1];
+		else
+			return "";
+	}
+
+
+	/**
+	 * @param answerList the answerList to set
+	 */
+	public void setAnswerList(String[] answerList) {
+		this.answerList = answerList;
+	}
 	
 	
 }
