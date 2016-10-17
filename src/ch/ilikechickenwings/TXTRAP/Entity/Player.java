@@ -1,6 +1,7 @@
 package ch.ilikechickenwings.TXTRAP.Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import ch.ilikechickenwings.TXTRAP.City;
 import ch.ilikechickenwings.TXTRAP.Console;
@@ -19,7 +20,7 @@ public class Player extends Human implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String gameClass;
 	private City birthCity;
-	
+	private ArrayList<City> cities;
 	
 	public String password;
 	public Processable processable;
@@ -69,6 +70,16 @@ public class Player extends Human implements Serializable{
 	public String getResponseLine() {
 			
 		return getResponseLine();
+	}
+
+
+	public ArrayList<City> getCities() {
+		return cities;
+	}
+
+
+	public void addCities(City city) {
+		cities.add(city);
 	}
 
 
