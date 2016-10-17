@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/tim/eclipse/java-neon/eclipse/external jars/json-20160810.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
