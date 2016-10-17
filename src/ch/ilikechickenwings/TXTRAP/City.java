@@ -22,14 +22,20 @@ public class City implements Serializable {
 	private WorldFrame world;
 
 	private String cityName;
+	private int posX;
+	private int posY;
 
 	/**
 	 *
 	 * @param cityname
 	 *            Constructs the city with a new name
+	 * @param  
+	 * @param y 
 	 */
-	public City(String cityname) {
+	public City(String cityname, int y, int x) {
 		setCityName(cityname);
+		setPosX(x);
+		setPosY(y);
 	}
 
 	/**
@@ -90,6 +96,22 @@ public class City implements Serializable {
 	 */
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 
 }

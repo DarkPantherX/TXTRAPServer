@@ -1,10 +1,18 @@
 package ch.ilikechickenwings.TXTRAP.Frames;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.json.simple.JSONObject;
+
 import ch.ilikechickenwings.TXTRAP.City;
 import ch.ilikechickenwings.TXTRAP.Console;
+import ch.ilikechickenwings.TXTRAP.JSonReader;
 import ch.ilikechickenwings.TXTRAP.NetInput;
 import ch.ilikechickenwings.TXTRAP.ServerProtocol;
 import ch.ilikechickenwings.TXTRAP.Entity.Entity;
@@ -55,57 +63,62 @@ public class WorldFrame implements Processable, Runnable, Serializable {
 
 	}
 
+	/**
+	 *Method that generats the world by reading a text file and adding a city everytime it  hits the char '-'
+	 */
+	
 	private void createWorld() {
-		City city = new City("Tamariel");
+		int lineRow = 1;
+		try(BufferedReader br = new BufferedReader(new InputStreamReader((InputStream)(getClass().getResourceAsStream("/World/map.texmap"))))) {
+		    for(String line; (line = br.readLine()) != null; ) {
+		    	int lineColumn=1;
+		    	for(int i=0; i<line.toCharArray().length;i++){
+		    		char c = line.toCharArray()[i];
+		    		if(c == '-'){
+		    			JSonReader jread = new JSonReader();
+		    			JSONObject obj= jread.readJSON("/World/"+line.toCharArray()[i+1]+line.toCharArray()[i+2]+".json");
+		    			City city = new City((String)obj.get("name"), lineRow, lineColumn);
+		    			PostOffice p = new PostOffice();
 
-		PostOffice p = new PostOffice();
+		    			
+		    			Market m = new Market(this);
+		    			m.getItems().add(new Item("Sword", 0, 50));
+		    			city.getPlaces().add(m);
+		    			city.getPlaces().add(p);
+		    			Whore peter = new Whore(100,"Peter",city,"",null);
+		    			peter.setGreeting("Hello!");
+		    			String[] oL = {"The weather is great today!","I don't like you","I like your hat"};
+		    			String[] aL = {"Yes, it is.", "Fuck off!","Who doesn't like hats?"};
+		    			peter.setOptionList(oL);
+		    			peter.setAnswerList(aL);
+		    			city.getEntities().add(peter);
+		    			Whorehouse h = new Whorehouse(this);
+		    			Whore h1 = new Whore(100, "Anna", city, "", h);
+		    			h.getHumans().add(h1);
+		    			city.getPlaces().add(h);
+		    			cities.add(city);
+		    			i=i+2;
+		    			
+		    		}
+		    		
+		    		lineColumn++;
+		    	}
 
-		
-		Market m = new Market(this);
-		m.getItems().add(new Item("Sword", 0, 50));
-		city.getPlaces().add(m);
-		city.getPlaces().add(p);
-		Whore peter = new Whore(100,"Peter",city,"",null);
-		peter.setGreeting("Hello!");
-		String[] oL = {"The weather is great today!","I don't like you","I like your hat"};
-		String[] aL = {"Yes, it is.", "Fuck off!","Who doesn't like hats?"};
-		peter.setOptionList(oL);
-		peter.setAnswerList(aL);
-		city.getEntities().add(peter);
-		cities.add(city);
-		city = new City("Bananistan");
-		p = new PostOffice();
-		city.getPlaces().add(p);
-		cities.add(city);
-		city = new City("Eschenbach");
-		
-		p = new PostOffice();
-		
-		city.getPlaces().add(p);
-		cities.add(city);
-		
-		city = new City("Schmerikon");
-		
-		p = new PostOffice();
-		city.getPlaces().add(p);
-		
-		cities.add(city);
-		city = new City("Ass");
+		    	lineRow++;
+		    }
+		    // line is not visible here.
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
-
-		
-		p = new PostOffice();
-		city.getPlaces().add(p);
-		
-		Whorehouse h = new Whorehouse(this);
-		Whore h1 = new Whore(100, "Anna", city, "", h);
-		h.getHumans().add(h1);
-		city.getPlaces().add(h);
-		
-		cities.add(city);
 	}
+
 
 	@Override
 	public void processInput(String[] s, ServerProtocol sP) {
